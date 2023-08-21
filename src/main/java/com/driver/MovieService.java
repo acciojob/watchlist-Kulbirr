@@ -16,7 +16,7 @@ public class MovieService {
 
     public String addMovie(Movie movie){
         movierepo.addMovie(movie);
-        return "Movie added successfully"
+        return "Movie added successfully";
     }
 
     public String addDirector(Director director) {
