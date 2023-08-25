@@ -10,80 +10,70 @@ import java.util.Map;
 
 @Repository
 public class MovieRepository {
-
-    Map<String,Movie> Moviedb = new HashMap<>();
-    Map<String,Director> Directordb = new HashMap<>();
-    Map<String,String> Pairdb = new HashMap<>();
-
-// add movie
+    HashMap<String,Movie>hMovies=new HashMap<>();
+    HashMap<String,Director>hDirectors=new HashMap<>();
+    HashMap<String,String>hMovieDirector=new HashMap<>();
     public void addMovie(Movie movie) {
-        Moviedb.put(movie.getName(), movie);
+        String name= movie.getName();
+        hMovies.put(name,movie);
     }
 
-//add director
-    public void addDirector(Director director){
-        Directordb.put(director.getName(), director);
+    public void addDirector(Director director) {
+        String name= director.getName();
+        hDirectors.put(name,director);
     }
 
-//    Pairing movie and director
     public void addMovieDirectorPair(String movie, String director) {
-    Pairdb.put(movie,director);
-}
+        hMovieDirector.put(movie,director);
+    }
 
-//    Get movie by name
     public Movie getMovieByName(String name) {
-        return Moviedb.get(name);
+        return hMovies.get(name);
     }
 
-
-//    get director my name
     public Director getDirectorByName(String name) {
-            return Directordb.get(name);
+        return hDirectors.get(name);
     }
-
-//    get movies by director name
 
     public List<String> getMoviesByDirectorName(String name) {
-        List<String> MovieByDirector = new ArrayList<>();
-        for(String movie : Pairdb.keySet()) {
-            if ((Pairdb.get(movie).equals(name))) {
-                MovieByDirector.add(movie);
+        List<String>movies=new ArrayList<>();
+        for(String movie: hMovieDirector.keySet()){
+            if(hMovieDirector.get(movie).equals(name)){
+                movies.add(movie);
             }
         }
-        return MovieByDirector;
+        return movies;
     }
 
-//    get all movies
     public List<String> findAllMovies() {
-        List<String> AllMovies = new ArrayList();
-        for(String movies : Moviedb.keySet()) {
-            AllMovies.add(movies);
+        List<String>movies=new ArrayList<>();
+        for(String name: hMovies.keySet()){
+            movies.add(name);
         }
-        return AllMovies;
+        return movies;
     }
 
     public void deleteDirectorByName(String name) {
-        if(Directordb.containsKey(name)){
-            Directordb.remove(name);
+        if(hDirectors.containsKey(name)){
+            hDirectors.remove((name));
         }
-        for(String movies : Pairdb.keySet()) {
-            if (Pairdb.get(movies).equals(name)) {
-                Moviedb.remove(name);
+        for(String movie:hMovieDirector.keySet()){
+            if(hMovieDirector.get(movie).equals(name)){
+                hMovies.remove(movie);
             }
         }
     }
 
-
     public void deleteAllDirectors() {
-        for(String name:Directordb.keySet()){
-            for(String movie:Pairdb.keySet()){
-                if(Pairdb.get(movie).equals(name)){
-                    if(Moviedb.containsKey(movie)){
-                        Moviedb.remove(movie);
+        for(String name:hDirectors.keySet()){
+            for(String movie:hMovieDirector.keySet()){
+                if(hMovieDirector.get(movie).equals(name)){
+                    if(hMovies.containsKey(movie)){
+                        hMovies.remove(movie);
                     }
                 }
             }
         }
-        Directordb.clear();
+        hDirectors.clear();
     }
 }
