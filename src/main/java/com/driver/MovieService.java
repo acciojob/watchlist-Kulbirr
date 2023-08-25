@@ -47,7 +47,7 @@ public class MovieService {
 
     public String deleteDirectorByName(String name) {
         movierepo.deleteDirectorByName(name);
-        return "Director deleted Successfully";
+        return "director deleted Successfully";
     }
 
     public String deleteAllDirectors() {

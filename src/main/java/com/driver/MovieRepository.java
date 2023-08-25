@@ -62,10 +62,9 @@ public class MovieRepository {
         return AllMovies;
     }
 
-    List<String> DeleteMovies = new ArrayList<>();
     public void deleteDirectorByName(String name) {
-        if(Pairdb.containsKey(name)){
-            Pairdb.remove((name));
+        if(Directordb.containsKey(name)){
+            Directordb.remove(name);
         }
         for(String movies : Pairdb.keySet()) {
             if (Pairdb.get(movies).equals(name)) {
